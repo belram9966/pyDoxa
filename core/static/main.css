@@ -1,0 +1,127 @@
+.modal-body {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+.crear-proyecto-button {
+	float: right;
+	margin-right: 15px;
+	/*margin-top: px;*/
+}
+/*.agregar-proyecto-button-unlock:hover {
+	float: right;
+	margin-right: 20px;
+	margin-top: 5px
+}*/
+
+
+
+/*a.proyectos:hover .agregar-proyecto-button-unlock,
+.agregar-proyecto-button-lock {
+    display: none;
+}
+.agregar-proyecto-button-unlock {
+    display: inline;
+}*/
+
+/*.toggle {
+	background-color: red !important;
+	width: 20px;
+	height: 20px;
+}
+
+a.proyectos span:hover,
+a.proyectos .agregar-proyecto-button-lock {
+    display: none;*/
+}
+/*a.proyectos:hover .agregar-proyecto-button-lock {
+    display: inline;
+}*/
+
+
+/** > .fa-hover-show,
+*:hover > .fa-hover-hidden {
+    display: none;
+}
+*:hover > .fa-hover-show {
+    display: inline;
+}*/
+
+
+.fa-plus-square:hover{
+   color: orange !important;
+}
+.fa-plus-square-o:hover{
+   color: orange !important;
+}
+
+
+/*.agregar-proyecto-button:hover {
+	background-color: red !important;
+}*/
+
+a#vista_lista {
+	position: absolute;
+    right: 0;
+    margin-right: 40px;
+}
+
+a#vista_lista:hover {
+	color: orange !important;
+}
+a#vista_drag_drop {
+	margin: 0px 20px 0px 20px;
+}
+a#vista_drag_drop:hover {
+	color: orange !important;
+}
+
+.modal .mensaje {
+	text-align: center;
+}
+
+.bold {
+	font-weight: normal;
+	font-weight: bold;
+}
+
+.cambiar-password {
+	margin-bottom: 10px !important;
+}
+
+.deletelink {
+	height: auto !important;
+}
+
+
+#myModal select {
+	border-radius: 10px;
+	padding: 5px;
+	background-color: white;
+}
+
+#myModal input {
+	border-radius: 10px;
+	padding: 5px;
+}
+
+.alert-success {
+	background-color:  #01db77 !important;
+	font-size: 16px !important;
+	font-weight: normal;
+	font-weight: bold;	
+}
+
+.alert-dismissible {
+	width: 90%;
+}
+
+@font-face {
+  font-family: "PaintScratch";
+  src: url("/static/fonts/PaintScratch.ttf") format('truetype');
+}
+
+.titulo-app {
+  font-family: "PaintScratch" !important;
+  font-size: 30px;
+}

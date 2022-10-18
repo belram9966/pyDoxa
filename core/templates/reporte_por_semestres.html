@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<table>
+		<thead>
+
+		</thead>
+		<tbody>
+			{% if secciones %}
+				{% for seccion in secciones %}
+					{% if seccion.es_quiebre_seccion %}
+						</tr>
+						<tr>
+						<td><center><strong>{{ seccion.numero }}</strong></center></td>
+					{% endif %}
+					
+				{% endfor %}
+				</tr>
+			{% endif %}
+
+
+
+
+		</tbody>
+	</table>
+</body>
+</html>

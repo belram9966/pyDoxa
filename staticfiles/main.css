@@ -1,0 +1,62 @@
+
+.crear-proyecto-button {
+	float: right;
+	margin-right: 15px;
+	/*margin-top: px;*/
+}
+/*.agregar-proyecto-button-unlock:hover {
+	float: right;
+	margin-right: 20px;
+	margin-top: 5px
+}*/
+
+
+
+/*a.proyectos:hover .agregar-proyecto-button-unlock,
+.agregar-proyecto-button-lock {
+    display: none;
+}
+.agregar-proyecto-button-unlock {
+    display: inline;
+}*/
+
+/*.toggle {
+	background-color: red !important;
+	width: 20px;
+	height: 20px;
+}
+
+a.proyectos span:hover,
+a.proyectos .agregar-proyecto-button-lock {
+    display: none;*/
+}
+/*a.proyectos:hover .agregar-proyecto-button-lock {
+    display: inline;
+}*/
+
+
+/** > .fa-hover-show,
+*:hover > .fa-hover-hidden {
+    display: none;
+}
+*:hover > .fa-hover-show {
+    display: inline;
+}*/
+
+
+.fa-plus-square:hover{
+   color: orange !important;
+}
+.fa-plus-square-o:hover{
+   color: orange !important;
+}
+
+
+/*.agregar-proyecto-button:hover {
+	background-color: red !important;
+}*/
+
+#myModal {
+	border-radius: 30px !important;
+}
+

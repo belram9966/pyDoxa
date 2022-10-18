@@ -1,0 +1,9 @@
+Django==2.2.6
+pytz==2019.2
+sqlparse==0.3.0
+whitenoise==4.1.4
+django-adminlte2==0.4.1
+psycopg2
+gunicorn
+pdfkit==0.6.1
+django-extensions==2.2.6

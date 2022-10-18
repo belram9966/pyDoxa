@@ -1,0 +1,148 @@
+.dnd-encuentro {
+	background-color: #F0F0F0;
+	padding: 5px 5px;
+	margin-bottom: 7px;
+	border-radius: 10px;
+	box-shadow: 3px 3px 5px gray;
+}
+.busqueda-encuentros .dnd-encuentro {
+	width: 17% !important;
+	display: inline-block !important;
+	margin-left: 1%;
+
+}
+
+.dnd-encuentro .titulo {
+	background-color: #357ca5;
+	border-radius: 3px;
+	padding: 3px 5px 1px 5px;
+	font-weight: bold !important;	
+/*	padding-right: 15px;
+	padding-top: 3px;
+	padding-left: 3px;
+	padding-bottom: 3px;*/
+	color: white;
+
+}
+
+small {
+	font-size: 14px;
+}
+
+.dnd-encuentro .titulo strong {
+	width: 50px;
+}
+
+.tabla-encuentros td {
+	width: 11% !important;
+}
+
+/*.tabla-encuentros td:nth-child(1) {
+	width: 6% !important;
+}*/
+
+
+.tabla-encuentros td.over {
+  /*border: 2px dashed #357ca5 !important;*/
+  box-shadow: 0px 0px 50px 2px #00c0ef;
+}
+}
+
+.busqueda-encuentros input, .busqueda-encuentros button {
+	margin-left: 0.5% !important;
+	margin-bottom: 5px;
+}
+.busqueda-encuentros input {
+	border-radius: 5px;
+	padding: 0.4%;
+}
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+    border: 1px solid #d1d1d1;
+}
+
+
+.table-bordered > tbody > tr.separador-turno > td, .table-bordered > tbody > tr.separador-turno > th, .table-bordered > tfoot > tr.separador-turno > td, .table-bordered > tfoot > tr.separador-turno > th, .table-bordered > thead > tr.separador-turno > td, .table-bordered > thead > tr.separador-turno > th {
+    border-top: 2px solid rgba(86, 86, 86, 0.82);
+}
+
+/*.table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td, .table-bordered > thead > tr > td {
+	height: 50px !important;
+	min-height: 50px !important;
+}
+*/
+.dnd-encuentro .icono-editar {
+	/*margin-left: 5px !important;*/
+	/*padding-top: 40px !important;*/
+	/*float: right !important;*/
+	color: white !important;
+	cursor: pointer;
+}
+
+.dnd-encuentro .icono-editar:hover {
+	color: orange !important;
+}
+
+.aula-button {
+	/*background-color: #f3ad2f;*/
+	/*background-color: #004a65;*/
+	/*background-color: rgba(0, 74, 101, 0.82);*/
+	background-color: #337ab7;
+	color: white;
+	height: 30px !important;
+	width: 30px !important;
+	border-radius: 4px;
+	border-radius: 4px;
+}
+
+.aula-button:hover {
+	color: orange;
+}
+
+.tabla-encuentros th {
+	background-color: rgba(229, 119, 20, 0.77);
+	border-radius: 6px;
+	box-shadow: 0px 3px 5px gray;
+}
+
+.tabla-encuentros td {
+	min-height: 30px !important;
+}
+
+/*.tabla-encuentros td strong.rango-bloque{
+	text-align: right !important;
+}*/
+.tabla-encuentros th:nth-child(1) {
+/*	background-color: white;
+	box-shadow: 0px 0px 0px white;*/
+	width: 2% !important;
+
+}
+.tabla-encuentros td:nth-child(1), .tabla-encuentros td:nth-child(2) {
+/*	background-olor: white;
+	box-shadow: 0px 0px 0px white;*/
+	width: 1% !important;
+
+}
+
+.swal-text {
+	font-weight: bold !important;
+	text-align: center !important;	
+}
+
+.boton-exportar {
+	margin-right: 50px !important;
+}
+
+#busqueda_encuentro, #limpiar_resultados_encuentro{
+	margin-left: 10px;
+}
+#busqueda_encuentro, #limpiar_resultados_encuentro{
+	margin-left: 9px;
+}
+
+.identificador-aula {
+    left: 0;
+    position: absolute;
+    margin-left: 20px;	
+    font-size: 20px !important;
+}

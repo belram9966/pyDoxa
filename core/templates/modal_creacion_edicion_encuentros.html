@@ -1,0 +1,184 @@
+<!-- Modal -->
+<div class="modal {% if mostrar_modal == 'encuentro_create' %}show{% else %}fade{% endif %}" id="creacionEdicionencuentroModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- <div class="modal show" id="encuentrosSeccionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="$('.modal').removeClass('show').addClass('fade');">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+	    <form id="formularioEncuentro" method='POST' action='/encuentro/' class='form-horizontal'>
+			<div class="modal-body">
+	      	  	{% csrf_token %}
+				<div class="box-body">
+			        <h4>Editar encuentro</h3>
+					<!-- <a href="/admin/core/bloque/add/" target="_blank" class="btn btn-success pull-right">Crear bloque</a> -->
+					<br>
+					<br>
+<!-- 					<div class="form-group">
+					  <label for="seccion" class="col-sm-2 control-label">sección</label>
+					  <div class="col-sm-10">
+					    <select class="form-control" name="seccion" value="{% if form_data.seccion %}{{form_data.seccion.0}}{% endif %}" id="seccion">
+					    	{% for seccion in secciones %}
+					    		<option value='{{ seccion.pk }}'>{{ seccion }}</option>
+					    	{% endfor %}
+					   	</select>
+					  	{% if form_errors.bloque %}
+						  	<span class='text-danger'>{{ form_errors.bloque.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div> -->
+					<div class="form-group">
+					  <label for="docente" class="col-sm-2 control-label">docente</label>
+					  <div class="col-sm-10">
+					    <select class="form-control" name="docente" value="{% if form_data.docente %}{{form_data.docente.0}}{% endif %}" id="docente">
+					    	{% for docente in docentes %}
+					    		<option value='{{ docente.pk }}'>{{ docente.nombre_apellido }}</option>
+					    	{% endfor %}
+					   	</select>
+					  	{% if form_errors.bloque %}
+						  	<span class='text-danger'>{{ form_errors.bloque.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div>										
+<!-- 					<div class="form-group">
+					  <label for="bloque" class="col-sm-2 control-label">bloque</label>
+					  <div class="col-sm-10">
+					    <select class="form-control" name="bloque" value="{% if form_data.bloque %}{{form_data.bloque.0}}{% endif %}" id="bloque">
+					    	{% for bloque in bloques %}
+					    		<option value='{{ bloque.pk }}'>{{ bloque }}</option>
+					    	{% endfor %}
+					   	</select>
+					  	{% if form_errors.bloque %}
+						  	<span class='text-danger'>{{ form_errors.bloque.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div> -->
+					<div class="form-group">
+					  <label for="aula" class="col-sm-2 control-label">aula</label>
+					  <div class="col-sm-10">
+					    <select class="form-control" name="aula" value="{% if form_data.aula %}{{form_data.aula.0}}{% endif %}" id="aula">
+					    	{% for aula in aulas %}
+					    		<option value='{{ aula.pk }}'>{{ aula.nombre }}</option>
+					    	{% endfor %}
+					   	</select>
+					  	{% if form_errors.aula %}
+						  	<span class='text-danger'>{{ form_errors.aula.0 }}</span>
+					  	{% endif %}						    	
+					  </div>
+					</div>
+					<!-- <div class="form-group"> -->
+					  <!-- <label for="seccion" class="col-sm-2 control-label">seccion</label> -->
+					  <!-- <div class="col-sm-10"> -->
+					    <input id="encuentroSeccion" name="seccion" id="seccion" value="{{ seccion_encuentro }}" hidden>
+					  	{% if form_errors.seccion %}
+						  	<span class='text-danger'>{{ form_errors.seccion.0 }}</span>
+					  	{% endif %}					   	
+					  <!-- </div> -->
+					<!-- </div>					 -->
+					<div class="form-group">
+					  <label for="tipo" class="col-sm-2 control-label">tipo</label>
+					  <div class="col-sm-10">
+					    <select class="form-control" name="tipo" value="{% if form_data.tipo %}{{form_data.tipo.0}}{% endif %}" id="tipo" placeholder="tipo">
+					    	{% for tip_pk, tip_nom in tipos_encuentros %}
+					    		<option value='{{ tip_pk }}'>{{ tip_nom }}</option>
+					    	{% endfor %}
+					   	</select>
+					  	{% if form_errors.tipo %}
+						  	<span class='text-danger'>{{ form_errors.tipo.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div>	
+					<div class="form-group">
+					  <label for="cupo" class="col-sm-2 control-label">cupo</label>
+					  <div class="col-sm-10">
+					    <input class="form-control" name="cupo" value="{% if form_data.cupo %}{{form_data.cupo.0}}{% endif %}" id="cupo" placeholder="cupo" type='number'>
+					  	{% if form_errors.cupo %}
+						  	<span class='text-danger'>{{ form_errors.cupo.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div>	
+<!-- 					<div class="form-group">
+					  <label for="dia" class="col-sm-2 control-label">dia</label>
+					  <div class="col-sm-10">
+					    <select class="form-control" name="dia" value="{% if form_data.dia %}{{form_data.dia.0}}{% endif %}" id="dia">
+					    	{% for dia in dias %}
+					    		<option value='{{ dia.pk }}'>{{ dia.get_dia_display }}</option>
+					    	{% endfor %}
+					   	</select>
+					  	{% if form_errors.dia %}
+						  	<span class='text-danger'>{{ form_errors.dia.0 }}</span>
+					  	{% endif %}						    	
+					  </div>
+					</div> -->
+<!-- 					<div class="form-group">
+					  <label for="hora_inicio" class="col-sm-2 control-label">hora de inicio</label>
+					  <div class="col-sm-4">
+					    <input type="text" class="form-control" name="hora_inicio" value="{% if form_data.hora_inicio %}{{form_data.hora_inicio.0}}{% endif %}" id="hora_inicio" placeholder="hora_inicio">
+					  	{% if form_errors.hora_inicio %}
+						  	<span class='text-danger'>{{ form_errors.hora_inicio.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					  <label for="esquema_bloque" class="col-sm-2 control-label">esquema de bloque</label>
+					  <div class="col-sm-4">
+					    <input type="text" class="form-control" name="esquema_bloque" value="{% if form_data.esquema_bloque %}{{form_data.esquema_bloque.0}}{% endif %}" id="esquema_bloque" placeholder="esquema_bloque">
+					  	{% if form_errors.esquema_bloque %}
+						  	<span class='text-danger'>{{ form_errors.esquema_bloque.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div>
+					<div class="form-group">
+					  <label for="turno" class="col-sm-2 control-label">turno</label>
+					  <div class="col-sm-4">
+					    <input type="text" class="form-control" name="turno" value="{% if form_data.turno %}{{form_data.turno.0}}{% endif %}" id="turno" placeholder="turno">
+					  	{% if form_errors.turno %}
+						  	<span class='text-danger'>{{ form_errors.turno.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div>
+					<div class="form-group">
+					  <label for="activo" class="col-sm-2 control-label">activo</label>
+					  <div class="col-sm-10">
+					  	<input type="checkbox" name="activo">
+					  	{% if form_errors.activo %}
+						  	<span class='text-danger'>{{ form_errors.activo.0 }}</span>
+					  	{% endif %}					    
+					  </div>
+					</div>						 -->
+				</div>
+			<!-- </div> -->
+				<div class="pull-left">
+					<button type="button" class="btn btn-danger eliminar-encuentro" style="margin-left: 30px" data-dismiss="modal" onclick="$('.modal').removeClass('show').addClass('fade');">Eliminar</button>
+				</div>
+				<div class="pull-right">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('.modal').removeClass('show').addClass('fade');">Cancelar</button>
+					<button type="submit" class="btn btn-primary submit-modal">Guardar</button>
+				</div>
+				<br>
+        		<hr>
+<!-- 	    		<div class="modal-content">
+			        <h4>Encuentros existentes</h3>
+			        <table class='table'>
+			        	<thead>
+				        	<th>Dia</th>
+				        	<th>Bloque</th>
+				        	<th>Aula</th>
+				        	<th>Ubicacion</th>
+			        	</thead>
+			        	<tbody>
+			        		{% for enc_dia in encuentros_dias %}
+			        			<tr>
+			        				<td>{{ enc_dia.dia.get_dia_display }}</td>
+			        				<td><a href="/admin/core/encuentrosdias/{{ enc_dia.pk }}/change/" target="_blank">{{ enc_dia.encuentro.bloque }}</a></td>
+			        				<td>{{ enc_dia.encuentro.aula }}</td>
+			        				<td>{{ enc_dia.encuentro.aula.ubicacion.nombre }}</td>
+			        			</tr>
+			        		{% endfor %}
+			        	</tbody>
+			        </table>
+	    		</div> -->
+    		</div>
+        </form>
+    </div>
+  </div>
+</div>

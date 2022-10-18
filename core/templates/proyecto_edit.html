@@ -1,0 +1,189 @@
+{% extends 'adminlte/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Editar proyecto{% endblock %}
+    <h2>{{ proyecto.nombre }}</h2>
+
+{% block javascript %}
+	{{ block.super }}
+	<script type="text/javascript">
+
+$('#agregarSeccion').click(function(e){
+	$('#formularioSeccion').attr('action', '/seccion/'); 
+	$('#formularioSeccion input').add('#formularioSeccion select').not('[name="csrfmiddlewaretoken"]').not('[name="proyecto"]').val('')
+
+});
+
+	</script>
+
+{% endblock %}
+
+{% block content %}
+
+	<div class="box">
+	        <div class="box-header with-border">
+	          <h3 class="box-title">Secciones</h3>
+	          <span class="pull-right">
+	          	<button id="agregarSeccion" class='btn btn-success agregar-seccion-button' data-toggle="modal" data-target="#agregarSeccionModal">Agregar sección</button>
+	          	<a id="vista_drag_drop" href="/proyectodnd/{{ proyecto.pk }}/"><i class="fa fa-table fa-2x" aria-hidden="true"></i></a>
+	      	  </span>
+	        </div>
+	        <div class="box-body">
+				<table class="table table-bordered">
+					<th>Sección</th>
+					<th>Materia</th>
+					<th>Encuentros</th>
+					<th>Docente</th>
+					<th>Aula</th>
+
+					{% for sec in secciones %}
+					<tr>
+				    	<td align='center'>{{ sec.numero }}</td>
+				    	<td> <a href="/admin/core/seccion/{{ sec.pk }}/change/">{{ sec.materia }}</a> </td>
+				    	<td align='center'><a href="/seccion-encuentros/?seccion={{ sec.pk }}">{{ sec.get_cantidad_encuentros }}</a></td>
+				    	<td align='center'>{{ sec.docente.nombres }}</td>
+				    	<td align='center'>{{ sec.aula }}</td>
+				    	<td>
+				    		<a href="#deleteConfirmationModal" class="trigger-btn" data-toggle="modal"><button class="btn btn-danger pull-right" style='margin-right: 2%' data-seccion="{{ sec.pk }}" onclick="$('#confirmarEliminarSeccion').attr('href', '/seccion/' + $(this).attr('data-seccion') + '/delete')">Eliminar</button></a>
+				    		<a href="/seccion/{{ sec.pk }}/update/" class="trigger-btn" data-toggle="modal"><button class="btn btn-info pull-right" style='margin-right: 1%'>Editar</button></a>
+				    	</td>
+					</tr>
+					{% endfor %}
+
+				</table>
+	        </div>
+
+
+
+
+	        <!-- /.box-body -->
+	        <div class="box-footer">
+
+	        </div>
+	        <!-- /.box-footer-->
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal {% if mostrar_modal == 'seccion_create' %}show{% else %}fade{% endif %}" id="agregarSeccionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="$('.modal').removeClass('show').addClass('fade');">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Agregar sección</h4>
+	      </div>
+		    <form id="formularioSeccion" method='POST' action='{% if update_action %}/seccion/{{ form_data.id.0 }}/update/{% else %}/seccion/{% endif %}' class='form-horizontal'>
+				<div class="modal-body">
+		      	  	{% csrf_token %}
+		      	  	<input hidden name="proyecto" value="{{ proyecto.pk }}">
+					<div class="box-body">
+						<div class="form-group">
+						  <label for="numero" class="col-sm-2 control-label">número</label>
+						  <div class="col-sm-10">
+						    <input type="text" class="form-control" name="numero" value="{% if form_data.numero %}{{form_data.numero.0}}{% endif %}" id="numero" placeholder="Seccion numero...">
+						  	{% if form_errors.numero %}
+							  	<span class='text-danger'>{{ form_errors.numero.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="materia" class="col-sm-2 control-label">materia</label>
+						  <div class="col-sm-10">
+						    <select class="form-control" name="materia" value="{% if form_data.materia %}{{form_data.materia.0}}{% endif %}" id="materia">
+						    	{% for materia in todas_materias_pertinentes %}
+						    		<option value='{{ materia.pk }}'>{{ materia.nombre }}</option>
+						    	{% endfor %}
+						   	</select>
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="docente" class="col-sm-2 control-label">docente</label>
+						  <div class="col-sm-10">
+						    <select class="form-control" name="docente" value="{% if form_data.docente %}{{form_data.docente.0}}{% endif %}" id="docente">
+						    	{% for docente in todos_docentes_pertinentes %}
+						    		<option value='{{ docente.pk }}'>{{ docente.nombres }}</option>
+						    	{% endfor %}
+						   	</select>
+						  </div>
+						</div>					
+						<div class="form-group">
+						  <label for="cupo" class="col-sm-2 control-label">cupos</label>
+						  <div class="col-sm-10">
+						    <input type="text" class="form-control" name="cupo" value="{% if form_data.cupo %}{{form_data.cupo.0}}{% endif %}" id="cupo" placeholder="Cupos">
+						  	{% if form_errors.cupo %}
+							  	<span class='text-danger'>{{ form_errors.cupo.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						</div>
+	<!-- 					<div class="form-group">
+						  <label for="turno" class="col-sm-2 control-label">turno</label>
+						  <div class="col-sm-10">
+						    <select class="form-control" name="turno" value="{% if form_data.turno %}{{form_data.turno.0}}{% endif %}" id="turno">
+						    	{% for turno in turnos %}
+						    		<option value='{{ turno.pk }}'>{{ turno.nombre }}</option>
+						    	{% endfor %}
+						   	</select>
+						  	{% if form_errors.turno %}
+							  	<span class='text-danger'>{{ form_errors.turno.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="aula" class="col-sm-2 control-label">aula</label>
+						  <div class="col-sm-10">
+						    <select class="form-control" name="aula" value="{% if form_data.aula %}{{form_data.aula.0}}{% endif %}" id="aula" placeholder="Seccion aula...">
+						    	{% for aula in aulas %}
+						    		<option value='{{ aula.pk }}'>{{ aula.nombre }}</option>
+						    	{% endfor %}
+						   	</select>
+						  	{% if form_errors.aula %}
+							  	<span class='text-danger'>{{ form_errors.aula.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						</div>					
+						<div class="form-group">
+						  <label for="hora_inicio" class="col-sm-2 control-label">hora de inicio</label>
+						  <div class="col-sm-4">
+						    <input type="text" class="form-control" name="hora_inicio" value="{% if form_data.hora_inicio %}{{form_data.hora_inicio.0}}{% endif %}" id="hora_inicio" placeholder="hora">
+						  	{% if form_errors.hora_inicio %}
+							  	<span class='text-danger'>{{ form_errors.hora_inicio.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						  <div class="col-sm-4">
+						    <input type="text" class="form-control" name="minutos_inicio" value="{% if form_data.minutos_inicio %}{{form_data.minutos_inicio.0}}{% endif %}" id="minutos_inicio" placeholder="minutos">
+						  	{% if form_errors.minutos_inicio %}
+							  	<span class='text-danger'>{{ form_errors.minutos_inicio.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="hora_fin" class="col-sm-2 control-label">hora de salida</label>
+						  <div class="col-sm-4">
+						    <input type="text" class="form-control" name="hora_fin" value="{% if form_data.hora_fin %}{{form_data.hora_fin.0}}{% endif %}" id="hora_fin" placeholder="hora">
+						  	{% if form_errors.hora_fin %}
+							  	<span class='text-danger'>{{ form_errors.hora_fin.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						  <div class="col-sm-4">
+						    <input type="text" class="form-control" name="minutos_fin" value="{% if form_data.minutos_fin %}{{form_data.minutos_fin.0}}{% endif %}" id="minutos_fin" placeholder="minutos">
+						  	{% if form_errors.minutos_fin %}
+							  	<span class='text-danger'>{{ form_errors.minutos_fin.0 }}</span>
+						  	{% endif %}					    
+						  </div>
+						</div> -->
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('.modal').removeClass('show').addClass('fade');">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Guardar</button>
+				</div>
+	        </form>
+	    </div>
+	  </div>
+	</div>
+
+	{% include 'modal_creacion_proyecto.html' %}
+	{% include 'modal_confirmacion_eliminacion.html' %}
+	{% include 'modal_encuentros_seccion.html' %}
+
+{% endblock %}

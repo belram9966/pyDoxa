@@ -1,0 +1,39 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Crear proyecto</h4>
+      </div>
+      <form method='POST' action='/proyecto/'>
+      	  {% csrf_token %}
+	      <div class="modal-body">
+	        	<input class="input creacion-proyecto-nombre" placeholder="Nombre del proyecto" name='nombre' required><br><br>
+	        	<select name='lapso_academico' required>
+	        		<option value="">Lapso académico</option>
+	        		{% for lapso in lapsos %}
+	        			<option value="{{ lapso.pk }}">{{ lapso.lapso }}</option>
+	        		{% endfor %}
+	        	</select>
+	        	<select class="lapso_field" placeholder="Pensum" name='pensum' required>
+	        		<option value="">Pensum</option>
+	        		{% for pensum in pensums %}
+	        			<option value="{{ pensum.pk }}">{{ pensum.nombre }}</option>
+	        		{% endfor %}
+	        	</select>
+        	{% if not pensums %}
+        		<br>
+              	<span class='text-danger'> El administrador debe asignarte a alguna carrera para poder seleccionar un pensum. </span>
+	        {% endif %}
+
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+	        <button type="submit" class="btn btn-primary">Guardar</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>

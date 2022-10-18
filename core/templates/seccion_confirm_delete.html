@@ -1,0 +1,27 @@
+{% extends 'adminlte/base.html' %}
+
+
+{% block content %}
+
+	<div class="box">
+	        <div class="box-header with-border">
+				<form method="post">{% csrf_token %}
+				    <p>Estas seguro que deseas eliminar "{{ object }}"?</p>
+				    <input type="submit" value="Confirmar" class='btn btn-danger'>
+				    <a href="/proyecto/{{object.proyecto.pk}}/"><button class='btn'>Cancelar</button></a>
+				</form>
+	        </div>
+	        <div class="box-body">
+
+
+			</div>
+	</div>
+
+
+{% endblock %}
+
+
+
+
+
+

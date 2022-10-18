@@ -1,0 +1,126 @@
+{% extends 'adminlte/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Editar proyecto{% endblock %}
+
+{% block javascript %}
+	{{ block.super }}
+	<script type="text/javascript">
+
+	var proyecto = {{ proyecto }};
+	var carrera = {{ carrera }};
+	{% if aulas %}
+		var aula = {{ aulas.0.nombre }};
+		var aula_pk = {{ aulas.0.pk }};	
+	{% else %}
+		var aula = null;
+		var aula_pk = null;	
+	{% endif %}
+
+	</script>
+    <script type="text/javascript" src='{% static "js/proyecto_drag_drop.js" %}'></script>
+
+{% endblock %}
+
+{% block stylesheets %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static 'proyecto_edit_drag_drop.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+	<div class="box busqueda-encuentros">
+
+		<div class="box-title">
+			<h3 style="margin-left: 20px" class="bold">{{ nombre_proyecto }}</h3>
+		</div>
+		<div class="box-body">
+			<input placeholder='ingrese materia' id='busqueda_materia'>
+			<input placeholder='ingrese sección' id='busqueda_seccion' type='number'>
+			<button class='btn btn-info' id='busqueda_encuentro'>Buscar encuentro</button>
+			<button class='btn btn-normal' id='limpiar_resultados_busqueda'>Limpiar</button>
+			<div id='resultados_busqueda'>
+
+			</div>
+		</div>	
+	</div>
+
+	<div>
+		{% for aula in aulas %}
+			<button class="aula-button" data-pk="{{ aula.pk }}">{{ aula.nombre }}</button>
+		{% endfor %}
+
+	</div>
+
+	<br>
+    <div class="container pull-left boton-exportar">
+	  <ul>
+	    <li class="dropdown">
+	      <a href="#" data-toggle="dropdown">Exportar <i class="icon-arrow"></i></a>
+	      <ul class="dropdown-menu">
+	        <li><a href="#" id="reporte_aula">[PDF] Horario de esta aula</a></li>
+	        <li><a href="/reporte/semestres/{{ proyecto }}/">[PDF] Horario por semestres</a></li>
+	        <li><a href="/dump/proyecto/{{ proyecto }}/csv/">[CSV] Dump del proyecto</a></li>
+	      </ul>
+	    </li>
+	  </ul>
+	</div>
+
+	<a class="btn btn-success pull-right" href="/admin/core/encuentrosdias/add/" target="_blank">Crear encuentro</a>
+
+	<br>
+
+
+
+
+	<br>
+	<br>
+
+	<div class="box">
+	        <div class="box-header with-border">
+	          <!-- <h3 class="box-title"><span class='bold'>Aula:</span> <span class="aula-actual"></span></h3> -->
+	          <h3 class="identificador-aula"><span class='bold'>Aula:</span> <span class="aula-actual"></span></h3>
+	          <span class="pull-right">
+	          	<a id="vista_lista" href="/admin/core/encuentro/?seccion__proyecto__id__exact={{ proyecto }}" target="__blank"><i class="fa fa-list fa-2x" aria-hidden="true"></i></a>
+	      	  </span>
+	        </div>
+	        <br>
+	        <div class='tabla-encuentros-wrapper'>
+
+
+	        </div>
+	</div>
+
+	<div id="deleteConfirmationModal" class="modal fade" style="display: none;">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<div class="icon-box">
+						<center>
+							<i class="fa fa-times-circle fa-4x" style='color: red !important'></i>
+							<h4 class="modal-title">Esta seguro?</h4>	
+						</center>
+					</div>				
+				</div>
+				<div class="modal-body">
+					<p>Realmente quiere eliminar este registro?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+					<a id="confirmarEliminarSeccion">
+						<button type="button" class="btn btn-danger">Eliminar</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% include 'modal_creacion_proyecto.html' %}
+	{% include 'modal_creacion_edicion_encuentros.html' %}
+	{% include 'modal_confirmacion_alerta.html' %}
+	{% include 'modal_error.html' %}
+
+
+{% endblock %}

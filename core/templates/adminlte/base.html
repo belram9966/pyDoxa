@@ -1,0 +1,32 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src='{% static "js/main.js" %}'></script>
+    <script type="text/javascript" src='{% static "js/sweetalert/docs/assets/sweetalert/sweetalert.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "menu_desplegable/js/index.js" %}'></script>
+
+{% endblock %}
+
+{% block content %}
+
+{{block.super}}
+<!-- Modal -->
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'menu_desplegable/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'menu_desplegable/css/style.css' %}">
+
+
+{% endblock %}
+
